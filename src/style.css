@@ -19,6 +19,7 @@ body {
   min-height: 100vh;
 }
 
+
 /* HEADER */
 .header {
   background-color: var(--accent-green);
@@ -219,3 +220,18 @@ body {
   font-size: 0.95rem;
   font-weight: 500;
 }
+
+/* scroll to top button */
+#myBtn {   
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 50px;
+  background-color: transparent;
+}
+
