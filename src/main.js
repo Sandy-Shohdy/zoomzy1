@@ -1,40 +1,43 @@
-// --- 🌟 Zoomzy Masonry Layout (Likes & Comments Below Images) ---
+// --- 🌟 Zoomzy Final Version with Image Feed API ---
 
 const app = document.querySelector("#app");
 let page = 1;
 const limit = 9;
 
-// 📸 Fetch photos from API
+// 📸 Fetch photos from Image Feed API
 async function fetchPhotos(page) {
-  const res = await fetch(`https://picsum.photos/v2/list?page=${page}&limit=${limit}`);
+  const res = await fetch(`https://image-feed-api.vercel.app/api/images?page=${page}`);
   if (!res.ok) throw new Error("Failed to load photos 😔");
-  return res.json();
+
+  const data = await res.json();
+  return data.data; // The actual array of photos
 }
 
-// 🖼️ Create photo card
+// 🖼️ Render each photo card
 function renderPhotoCard(photo) {
   const card = document.createElement("div");
   card.className = "photo-card";
   card.dataset.id = photo.id;
 
-  // Random height for asymmetric layout
-  const randomHeight = Math.floor(Math.random() * 300) + 300;
-
   card.innerHTML = `
-    <img src="https://picsum.photos/id/${photo.id}/500/${randomHeight}" alt="${photo.author}" />
-    <p class="author">${photo.author}</p>
+    <img src="${photo.image_url}" alt="Photo ${photo.id}" />
+    <p class="author">${photo.author || "Anonymous"}</p>
 
     <div class="photo-actions">
       <button class="like-btn" data-id="${photo.id}">
-        ❤️ <span class="like-count">${getLikeCount(photo.id)}</span>
+        ❤️ <span class="like-count">${photo.likes_count || 0}</span>
       </button>
       <button class="comment-btn-toggle">
-        💬 <span class="comment-count">${getCommentCount(photo.id)}</span>
+        💬 <span class="comment-count">${photo.comments?.length || 0}</span>
       </button>
     </div>
 
     <div class="comment-section" style="display:none;">
-      <ul class="comment-list"></ul>
+      <ul class="comment-list">
+        ${(photo.comments || [])
+          .map((c) => `<li><strong>${c.commenter_name}:</strong> ${c.comment}</li>`)
+          .join("")}
+      </ul>
       <div class="comment-input">
         <input type="text" placeholder="Add a comment..." />
         <button class="comment-btn">Post</button>
@@ -47,51 +50,27 @@ function renderPhotoCard(photo) {
   return card;
 }
 
-// ❤️ Get like count from localStorage
-function getLikeCount(id) {
-  const likes = JSON.parse(localStorage.getItem("likes")) || {};
-  return likes[id] || 0;
-}
-
-// ❤️ Save like count to localStorage
-function saveLikeCount(id, count) {
-  const likes = JSON.parse(localStorage.getItem("likes")) || {};
-  likes[id] = count;
-  localStorage.setItem("likes", JSON.stringify(likes));
-}
-
-// 💬 Get comment count from localStorage
-function getCommentCount(id) {
-  const comments = JSON.parse(localStorage.getItem("comments")) || {};
-  return comments[id] ? comments[id].length : 0;
-}
-
-// ❤️ Like functionality
+// ❤️ Like handling (local + API)
 function setupLike(card) {
   const btn = card.querySelector(".like-btn");
   const countSpan = card.querySelector(".like-count");
   const id = card.dataset.id;
 
-  btn.addEventListener("click", () => {
-    const currentCount = parseInt(countSpan.textContent);
-    const likedPhotos = JSON.parse(localStorage.getItem("likedPhotos")) || [];
-
-    if (btn.classList.toggle("liked")) {
-      countSpan.textContent = currentCount + 1;
-      saveLikeCount(id, currentCount + 1);
-      likedPhotos.push(id);
-    } else {
-      countSpan.textContent = currentCount - 1;
-      saveLikeCount(id, currentCount - 1);
-      const index = likedPhotos.indexOf(id);
-      if (index !== -1) likedPhotos.splice(index, 1);
+  btn.addEventListener("click", async () => {
+    try {
+      const res = await fetch(`https://image-feed-api.vercel.app/api/images/${id}/like`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (data.success) countSpan.textContent = data.likes_count;
+      btn.classList.add("liked");
+    } catch (err) {
+      console.error("Like failed:", err);
     }
-
-    localStorage.setItem("likedPhotos", JSON.stringify(likedPhotos));
   });
 }
 
-// 💬 Comment functionality
+// 💬 Comments handling (local + API)
 function setupComments(card) {
   const section = card.querySelector(".comment-section");
   const input = card.querySelector(".comment-input input");
@@ -100,42 +79,40 @@ function setupComments(card) {
   const id = card.dataset.id;
   const toggleBtn = card.querySelector(".comment-btn-toggle");
 
-  const comments = JSON.parse(localStorage.getItem("comments")) || {};
-  if (comments[id]) comments[id].forEach((c) => renderComment(list, c));
-
   toggleBtn.addEventListener("click", () => {
     section.style.display = section.style.display === "none" ? "block" : "none";
   });
 
-  postBtn.addEventListener("click", () => {
+  postBtn.addEventListener("click", async () => {
     const text = input.value.trim();
     if (!text) return;
-    renderComment(list, text);
-    input.value = "";
-
-    const comments = JSON.parse(localStorage.getItem("comments")) || {};
-    if (!comments[id]) comments[id] = [];
-    comments[id].push(text);
-    localStorage.setItem("comments", JSON.stringify(comments));
-
-    card.querySelector(".comment-count").textContent = comments[id].length;
+    try {
+      const res = await fetch(`https://image-feed-api.vercel.app/api/images/${id}/comment`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ commenter_name: "User", comment: text }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${data.comment.commenter_name}:</strong> ${data.comment.comment}`;
+        list.appendChild(li);
+        input.value = "";
+        card.querySelector(".comment-count").textContent = list.children.length;
+      }
+    } catch (err) {
+      console.error("Comment failed:", err);
+    }
   });
 }
 
-// 💬 Render comment in DOM
-function renderComment(list, text) {
-  const li = document.createElement("li");
-  li.textContent = text;
-  list.appendChild(li);
-}
-
-// 🧩 Load photos to the gallery
+// 🧩 Load and display photos
 async function loadPhotos() {
   const photos = await fetchPhotos(page);
   photos.forEach((photo) => app.appendChild(renderPhotoCard(photo)));
 }
 
-// 🔁 Setup Load More button
+// 🔁 Load more button
 async function setupLoadMore() {
   const btn = document.createElement("button");
   btn.id = "load-more";
@@ -152,16 +129,14 @@ async function setupLoadMore() {
   btn.addEventListener("click", async () => {
     btn.disabled = true;
     loading.style.display = "block";
-
     page++;
     await loadPhotos();
-
     loading.style.display = "none";
     btn.disabled = false;
   });
 }
 
-// 🚀 Initialize app
+// 🚀 Initialize
 async function init() {
   await loadPhotos();
   setupLoadMore();
