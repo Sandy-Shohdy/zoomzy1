@@ -6,10 +6,11 @@ const limit = 9;
 
 // 📸 Fetch photos from API
 async function fetchPhotos(page) {
-  const res = await fetch(`https://picsum.photos/v2/list?page=${page}&limit=${limit}`);
+  const res = await fetch(`https://image-feed-api.vercel.app/?page=${page}&limit=${limit}`);
   if (!res.ok) throw new Error("Failed to load photos 😔");
   return res.json();
 }
+
 
 // 🖼️ Create photo card
 function renderPhotoCard(photo) {
