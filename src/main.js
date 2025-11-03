@@ -1,4 +1,11 @@
-// --- 🌟 Zoomzy Final Version with Image Feed API ---
+const toggle = document.getElementById("toggle");
+const body = document.body;
+
+toggle.addEventListener("click", () => {
+  const isLight = body.classList.toggle("light");
+  // keep the switch knob visual in sync
+  toggle.classList.toggle("light", isLight);
+});
 
 const app = document.querySelector("#app");
 let page = 1;
@@ -6,7 +13,9 @@ const limit = 9;
 
 // 📸 Fetch photos from Image Feed API
 async function fetchPhotos(page) {
-  const res = await fetch(`https://image-feed-api.vercel.app/api/images?page=${page}`);
+  const res = await fetch(
+    `https://image-feed-api.vercel.app/api/images?page=${page}`
+  );
   if (!res.ok) throw new Error("Failed to load photos 😔");
 
   const data = await res.json();
@@ -35,7 +44,9 @@ function renderPhotoCard(photo) {
     <div class="comment-section" style="display:none;">
       <ul class="comment-list">
         ${(photo.comments || [])
-          .map((c) => `<li><strong>${c.commenter_name}:</strong> ${c.comment}</li>`)
+          .map(
+            (c) => `<li><strong>${c.commenter_name}:</strong> ${c.comment}</li>`
+          )
           .join("")}
       </ul>
       <div class="comment-input">
@@ -58,9 +69,12 @@ function setupLike(card) {
 
   btn.addEventListener("click", async () => {
     try {
-      const res = await fetch(`https://image-feed-api.vercel.app/api/images/${id}/like`, {
-        method: "POST",
-      });
+      const res = await fetch(
+        `https://image-feed-api.vercel.app/api/images/${id}/like`,
+        {
+          method: "POST",
+        }
+      );
       const data = await res.json();
       if (data.success) countSpan.textContent = data.likes_count;
       btn.classList.add("liked");
@@ -87,11 +101,14 @@ function setupComments(card) {
     const text = input.value.trim();
     if (!text) return;
     try {
-      const res = await fetch(`https://image-feed-api.vercel.app/api/images/${id}/comment`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ commenter_name: "User", comment: text }),
-      });
+      const res = await fetch(
+        `https://image-feed-api.vercel.app/api/images/${id}/comment`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ commenter_name: "User", comment: text }),
+        }
+      );
       const data = await res.json();
       if (data.success) {
         const li = document.createElement("li");
