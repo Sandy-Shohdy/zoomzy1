@@ -2,15 +2,26 @@
 
 const app = document.querySelector("#app");
 let page = 1;
-const limit = 9;
+
 
 // 📸 Fetch photos from Image Feed API
-async function fetchPhotos(page) {
+/*async function fetchPhotos(page) {
   const res = await fetch(`https://image-feed-api.vercel.app/api/images?page=${page}`);
   if (!res.ok) throw new Error("Failed to load photos 😔");
 
   const data = await res.json();
   return data.data; // The actual array of photos
+}*/
+
+function fetchPhotos(page){
+  return fetch(`https://image-feed-api.vercel.app/api/images?page=${page}`)
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load photos"); //https://developer.mozilla.org/en-US/docs/Web/API/Response/ok
+      return res.json();
+    })
+    .then(json => json.data)
+    .catch(error => {      console.error("There was a problem fetching images:", error);//in the browser console we will see this message if there is an error.
+    });
 }
 
 // 🖼️ Render each photo card
