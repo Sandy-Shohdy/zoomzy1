@@ -1,17 +1,41 @@
 // --- 🌟 Zoomzy Final Version with Image Feed API ---
 
 const app = document.querySelector("#app");
-let page = 1;
-const limit = 9;
+let page = 1; // start from page 1
+const totalPages = 20; // we know there are 20 pages total
 
-// 📸 Fetch photos from Image Feed API
-async function fetchPhotos(page) {
-  const res = await fetch(`https://image-feed-api.vercel.app/api/images?page=${page}`);
-  if (!res.ok) throw new Error("Failed to load photos 😔");
-
-  const data = await res.json();
-  return data.data; // The actual array of photos
+// Fetch photos from the API
+function fetchPhotos(page){
+  return fetch(`https://image-feed-api.vercel.app/api/images?page=${page}`)
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load photos"); //more info about how .ok works on: https://developer.mozilla.org/en-US/docs/Web/API/Response/ok
+      return res.json();
+    })
+    .then(json => json.data)
+    .catch(error => {      console.error("There was a problem fetching images:", error); //in the browser console we will see this message if there is an error.
+    
+    app.innerHTML = `<p style="color:red;">Failed to load photos</p>`; //display message in the app area
+});
+    
 }
+
+const randomAuthors = [
+  "Luna Rivera",
+  "Kai Nakamur",
+  "Mila Novak",
+  "Omar Hassan",
+  "Sophie Laurent",
+  "Ethan Kim",
+  "Ava Rossi",
+  "Leo Carter",
+  "Zara Ali",
+  "Nina Johansson",
+  "Felix Moreau",
+  "Isla Becker",
+  "Theo Martins",
+  "Maya Chen",
+  "Noah Patel"
+]; // Random author names
 
 // 🖼️ Render each photo card
 function renderPhotoCard(photo) {
@@ -19,9 +43,13 @@ function renderPhotoCard(photo) {
   card.className = "photo-card";
   card.dataset.id = photo.id;
 
+  const authorName =
+    photo.author || randomAuthors[Math.floor(Math.random() * randomAuthors.length)]; // Use random author, because none is provided by the API
+
   card.innerHTML = `
     <img src="${photo.image_url}" alt="Photo ${photo.id}" />
-    <p class="author">${photo.author || "Anonymous"}</p>
+    <p class="author">${authorName}</p>
+
 
     <div class="photo-actions">
       <button class="like-btn" data-id="${photo.id}">
@@ -35,7 +63,10 @@ function renderPhotoCard(photo) {
     <div class="comment-section" style="display:none;">
       <ul class="comment-list">
         ${(photo.comments || [])
-          .map((c) => `<li><strong>${c.commenter_name}:</strong> ${c.comment}</li>`)
+          .map(
+            (c) =>
+              `<li><strong>${c.commenter_name}:</strong> ${c.comment}</li>`
+          )
           .join("")}
       </ul>
       <div class="comment-input">
