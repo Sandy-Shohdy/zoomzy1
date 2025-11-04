@@ -1,22 +1,28 @@
-// --- 🌟 Zoomzy Final Version with Image Feed API ---
+const toggle = document.getElementById("toggle");
+const body = document.body;
+
+toggle.addEventListener("click", () => {
+  const isLight = body.classList.toggle("light");
+  toggle.classList.toggle("light", isLight);
+});
 
 const app = document.querySelector("#app");
 let page = 1; // start from page 1
 const totalPages = 20; // we know there are 20 pages total
 
 // Fetch photos from the API
-function fetchPhotos(page){
+function fetchPhotos(page) {
   return fetch(`https://image-feed-api.vercel.app/api/images?page=${page}`)
-    .then(res => {
+    .then((res) => {
       if (!res.ok) throw new Error("Failed to load photos"); //more info about how .ok works on: https://developer.mozilla.org/en-US/docs/Web/API/Response/ok
       return res.json();
     })
-    .then(json => json.data)
-    .catch(error => {      console.error("There was a problem fetching images:", error); //in the browser console we will see this message if there is an error.
-    
-    app.innerHTML = `<p style="color:red;">Failed to load photos</p>`; //display message in the app area
-});
-    
+    .then((json) => json.data)
+    .catch((error) => {
+      console.error("There was a problem fetching images:", error); //in the browser console we will see this message if there is an error.
+
+      app.innerHTML = `<p style="color:red;">Failed to load photos</p>`; //display message in the app area
+    });
 }
 
 const randomAuthors = [
@@ -34,7 +40,7 @@ const randomAuthors = [
   "Isla Becker",
   "Theo Martins",
   "Maya Chen",
-  "Noah Patel"
+  "Noah Patel",
 ]; // Random author names
 
 // 🖼️ Render each photo card
@@ -64,8 +70,7 @@ function renderPhotoCard(photo) {
       <ul class="comment-list">
         ${(photo.comments || [])
           .map(
-            (c) =>
-              `<li><strong>${c.commenter_name}:</strong> ${c.comment}</li>`
+            (c) => `<li><strong>${c.commenter_name}:</strong> ${c.comment}</li>`
           )
           .join("")}
       </ul>
@@ -89,9 +94,12 @@ function setupLike(card) {
 
   btn.addEventListener("click", async () => {
     try {
-      const res = await fetch(`https://image-feed-api.vercel.app/api/images/${id}/like`, {
-        method: "POST",
-      });
+      const res = await fetch(
+        `https://image-feed-api.vercel.app/api/images/${id}/like`,
+        {
+          method: "POST",
+        }
+      );
       const data = await res.json();
       if (data.success) countSpan.textContent = data.likes_count;
       btn.classList.add("liked");
@@ -118,11 +126,14 @@ function setupComments(card) {
     const text = input.value.trim();
     if (!text) return;
     try {
-      const res = await fetch(`https://image-feed-api.vercel.app/api/images/${id}/comment`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ commenter_name: "User", comment: text }),
-      });
+      const res = await fetch(
+        `https://image-feed-api.vercel.app/api/images/${id}/comment`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ commenter_name: "User", comment: text }),
+        }
+      );
       const data = await res.json();
       if (data.success) {
         const li = document.createElement("li");

@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zoomzy</title>
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="/src/style.css" />
-  </head>
 
-  <body>
-    <header class="header">
-      <h1 class="logo">Zoomzy</h1>
-      <p class="tagline">Discover and interact with beautiful photos</p>
-      <input
-        type="text"
-        id="search"
-        placeholder="🔍 Search photos..."
-        aria-label="Search photos"
-      />
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zoomzy</title>
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
 
-    <main>
-      <div id="app"></div>
-    </main>
+<body>
+  <div id="toggle" class="theme-toggle">
+  </div>
 
-    <footer class="footer">
-      <p>© 2025 Zoomzy — made with ❤️ by Team 3</p>
-    </footer>
+  <header class="side-header">
+    <nav class="navigation">
+      <a href="#home"><img src="img/icons8-home-64.png" alt="home" /></a>
+      <a href="#gallery">
+        <img src="img/icons8-gallery-64.png" alt="gallery" /></a>
+      <a href="login.html"><img src="img/icons8-login-50.png" alt="login" /></a>
 
-    <script type="module" src="/src/main.js"></script>
-  </body>
+    </nav>
+  </header>
+  <section id="home">
+    <div class="logo-container">
+      <img class="logo" src="img/zoomzy logo.png" alt="logo" />
+    </div>
+
+    <p class="tagline">Discover and interact with beautiful photos</p>
+    <input type="text" id="search" placeholder="🔍 Search photos..." aria-label="Search photos" />
+  </section>
+
+  <main id="gallery">
+    <div id="app"></div>
+  </main>
+
+
+
+  <footer class="footer">
+    <p>© 2025 Zoomzy — made with ❤️ by Team 3</p>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
