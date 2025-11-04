@@ -1,4 +1,3 @@
-
 :root {
   --bg-dark: #000;
   --accent-green: #5e8c31;
@@ -9,13 +8,19 @@
   font-weight: 400;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: #00000e;
+  color: var(--text-light);
+  display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-left: 70px; /* match .side-header width */
-  box-sizing: border-box;
-  color: #fbf8f8;
+  padding-left: 70px; /* space for side-header */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 body.light {
@@ -23,18 +28,10 @@ body.light {
   color: black;
 }
 
-body.light .tagline {
-  color: #0d0000;
-}
-
-/* existing #toggle.dark rules already move the knob */
-#toggle.light {
-  background-color: rgb(246, 244, 244);
-}
-
+/* TOGGLE */
 #toggle {
   position: absolute;
-  top: 20px; /* distance from the top */
+  top: 20px;
   right: 20px;
   width: 50px;
   height: 20px;
@@ -42,36 +39,29 @@ body.light .tagline {
   background-color: #f9f2f2;
   cursor: pointer;
   transition: background-color 0.3s;
+  z-index: 1100;
 }
+
 #toggle::before {
   content: "";
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background-color: #52b670;
-  transition: transform 0.3s;
   position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s;
 }
+
 #toggle.light {
   background-color: rgb(12, 0, 0);
 }
 #toggle.light::before {
-  transform: translate(30px);
+  transform: translateX(30px);
 }
 
-@media (max-width: 600px) {
-  #toggle {
-    top: 10px;
-    right: 10px;
-    position: static;
-    top: 20px; /* distance from the top */
-    right: 20px;
-    width: 50px;
-    height: 20px;
-  }
-}
-
-/* HEADER */
+/* SIDE HEADER */
 .side-header {
   position: fixed;
   top: 0;
@@ -85,102 +75,62 @@ body.light .tagline {
   padding-top: 40px;
   gap: 30px;
   z-index: 1000;
+  transition: background-color 0.3s;
 }
 
 body.light .side-header {
   background-color: #032a13;
 }
-body.light .navigation img {
-  filter: invert(1);
-}
+
 .navigation {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  width: 10px;
   align-items: center;
-  justify-items: center;
+  gap: 30px;
 }
+
 .navigation img {
   width: 30px;
   height: 30px;
   transition: transform 0.2s;
-}
-@media (max-width: 600px) {
-  .side-header {
-    position: relative;
-    width: 100%;
-    height: auto;
-    background-color: #ebebdf;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-  }
-  .navigation {
-    flex-direction: row;
-    gap: 20px;
-    justify-content: center;
-    transition: transform 0.2s;
-  }
-
-  .navigation img {
-    width: 25px;
-    height: 25px;
-  }
+  cursor: pointer;
 }
 
+.navigation img:hover {
+  transform: scale(1.1);
+}
+
+body.light .navigation img {
+  filter: invert(1);
+}
+
+/* HOME SECTION */
 #home {
   display: flex;
-  align-items: center; /* horizontally center children */
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   max-width: 1200px;
   margin: 20px auto;
   text-align: center;
-  width: 900px;
+  padding: 0 20px;
 }
 
-@media (max-width: 600px) {
-  #home {
-    width: 100%;
-  
-  }
-}
-
-
-/* .logo-container {
+.logo-container {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  width: 550px;
-} */
+  align-items: center;
+  gap: 20px;
+}
 
 .logo {
   width: 200px;
   height: auto;
-  cursor: pointer;
 }
 
-@media (max-width: 600px) {
-  .logo-container {
-    flex-direction: column;
-    width: 90%;
-  }
+/* GALLERY */
+#gallery {
+  width: 100%;
 }
-
-/* #search {
-  max-width: 360px;
-  width: 40%;
-  margin: 0;
-  padding: 0.7rem 1rem;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
-  transition: box-shadow 0.3s;
-  justify-content: space-around;
-} */
-
-/* GALLERY Layout */
 
 #app {
   display: grid;
@@ -192,29 +142,14 @@ body.light .navigation img {
   margin: 0 auto;
 }
 
-@media (max-width: 1000px) {
-  #app {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  #app {
-    grid-template-columns: 1fr;
-    padding: 1rem;
-  }
-}
-
 .photo-card {
-  break-inside: avoid; /* keeps whole card in one column */
   background-color: #111;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 1rem;
-  display: inline-block;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .photo-card:hover {
@@ -234,16 +169,14 @@ body.light .navigation img {
   transform: scale(1.05);
 }
 
-/* AUTHOR */
 .author {
   padding: 0.75rem 1rem 0;
   font-weight: 600;
-  color: #fff;
   font-size: 1rem;
+  color: #fff;
   text-align: left;
 }
 
-/* ACTIONS BELOW IMAGE */
 .photo-actions {
   display: flex;
   justify-content: flex-start;
@@ -275,12 +208,6 @@ body.light .navigation img {
   color: #ff4d4d;
 }
 
-.like-count,
-.comment-count {
-  font-size: 0.9rem;
-}
-
-/* COMMENT SECTION */
 .comment-section {
   padding: 0.75rem 1rem 1rem;
   border-top: 1px solid #222;
@@ -288,12 +215,9 @@ body.light .navigation img {
 
 .comment-list {
   list-style: none;
-  padding: 0;
-  margin: 0 0 0.5rem 0;
-  text-align: left;
-  color: #ddd;
   max-height: 100px;
   overflow-y: auto;
+  color: #ddd;
 }
 
 .comment-input {
@@ -324,7 +248,6 @@ body.light .navigation img {
   background-color: #535bf2;
 }
 
-/* LOAD MORE BUTTON */
 #load-more {
   display: block;
   margin: 2rem auto;
@@ -344,62 +267,55 @@ body.light .navigation img {
   transform: scale(1.05);
 }
 
-#loading {
-  text-align: center;
-  color: #aaa;
-  margin-bottom: 1rem;
-}
-
 /* FOOTER */
 .footer {
-  border: 1px black;
   display: flex;
-  background-color: #ebebdf;
   justify-content: center;
   align-items: center;
   font-size: 14px;
-  font-family: initial;
-  padding: 0 20px;
+  padding: 20px;
+  background-color: #ebebdf;
   color: #0c0000;
-  margin: 10px;
+  text-align: center;
 }
 
-@media (max-width: 600px) {
-  .footer {
-    align-items: center;
+body.light .footer {
+  background-color: #032a13;
+  color: #fff;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 1000px) {
+  #app {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-main {
-  box-sizing: border-box;
-  padding: 50px;
-}
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   body {
     padding-left: 0;
+  }
+  .side-header {
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  .navigation {
+    flex-direction: row;
     gap: 20px;
   }
-
-  main {
-    padding-top: 0;
+  #home {
+    flex-direction: column;
+    padding: 10px;
   }
-}
-
-.Login-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.sign-up {
-  border-radius: 30px;
-  width: 150px;
-  height: 50px;
-}
-
-.sign-up:hover {
-  background-color: #52b670;
+  #app {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  .logo {
+    width: 150px;
+  }
 }
