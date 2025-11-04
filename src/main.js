@@ -19,10 +19,9 @@ function fetchPhotos(page){
     
 }
 
-
 const randomAuthors = [
   "Luna Rivera",
-  "Kai Nakamura",
+  "Kai Nakamur",
   "Mila Novak",
   "Omar Hassan",
   "Sophie Laurent",
