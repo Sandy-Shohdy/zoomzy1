@@ -3,7 +3,6 @@ const body = document.body;
 
 toggle.addEventListener("click", () => {
   const isLight = body.classList.toggle("light");
-  // keep the switch knob visual in sync
   toggle.classList.toggle("light", isLight);
 });
 

@@ -8,8 +8,8 @@
 </head>
 <header class="side-header">
     <nav class="navigation">
-        <a href="#home"><img src="img/icons8-home-64.png" alt="home" /></a>
-        <a href="#gallery">
+        <a href="index.html"><img src="img/icons8-home-64.png" alt="home" /></a>
+        <a href="index.html">
             <img src="img/icons8-gallery-64.png" alt="gallery" /></a>
         <a href="login"><img src="img/icons8-login-50.png" alt="login" /></a>
     </nav>
@@ -19,6 +19,16 @@
 
 <body>
 
+
+
+
+    <div id="toggle" class="theme-toggle">
+    </div>
+
+
+
+
+
     <section id="home">
         <div class="logo-container">
             <img class="logo" src="img/zoomzy logo.png" alt="logo" />
@@ -27,7 +37,7 @@
 
 
 
-        <div class="Login-page">
+        <section id="Login-page">
 
             <p class="  login-text">
                 Login or Register </p>
@@ -55,8 +65,21 @@
                 <label for="email">Password</label> <br>
                 <input type="password" id="pass" name="password" minlength="8" required />
             </form>
+            <button class="login">
+                Log in
+            </button>
+            <p> OR</p>
 
-        </div>
+            <button class="login-google">
+                <img src="img/icons8-google-logo-48.png" alt="google">
+                <p> Continue with Google</p>
+            </button>
+
+            <button class="login-apple">
+                <img src="img/icons8-apple-logo-48.png" alt="apple">
+                <p> Continue with Apple</p>
+            </button>
+        </section>
 
         <footer class="footer">
             <p>© 2025 Zoomzy — made with ❤️ by Team 3</p>

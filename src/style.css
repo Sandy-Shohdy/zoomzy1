@@ -37,8 +37,8 @@ body.light .tagline {
   position: absolute;
   top: 20px; /* distance from the top */
   right: 20px;
-  width: 60px;
-  height: 30px;
+  width: 50px;
+  height: 20px;
   border-radius: 34px;
   background-color: #f9f2f2;
   cursor: pointer;
@@ -46,10 +46,8 @@ body.light .tagline {
 }
 #toggle::before {
   content: "";
-  top: 3px;
-  left: 3px;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background-color: #52b670;
   transition: transform 0.3s;
@@ -60,6 +58,18 @@ body.light .tagline {
 }
 #toggle.light::before {
   transform: translate(30px);
+}
+
+@media (max-width: 600px) {
+  #toggle {
+    top: 10px;
+    right: 10px;
+    position: static;
+    top: 20px; /* distance from the top */
+    right: 20px;
+    width: 50px;
+    height: 20px;
+  }
 }
 
 /* HEADER */
@@ -79,11 +89,9 @@ body.light .tagline {
 }
 
 body.light .side-header {
-  background-color: #032a13; /* pick any color you prefer */
-  /* adjust contrast for icons/text if needed */
+  background-color: #032a13;
 }
 body.light .navigation img {
-  /* if your icons need a different treatment in light mode, tweak here */
   filter: invert(1);
 }
 .navigation {
@@ -101,19 +109,25 @@ body.light .navigation img {
 }
 @media (max-width: 600px) {
   .side-header {
+    position: relative;
     width: 100%;
     height: auto;
-    padding: 10px 10px;
-    position: static;
+    background-color: #ebebdf;
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: row;
-    gap: 10px;
+    align-items: center;
+    padding: 10px 0;
   }
   .navigation {
     flex-direction: row;
     gap: 20px;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  .navigation img {
+    width: 25px;
+    height: 25px;
   }
 }
 
@@ -373,4 +387,22 @@ main {
   main {
     padding-top: 0;
   }
+}
+
+.Login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sign-up {
+  border-radius: 30px;
+  width: 150px;
+  height: 50px;
+}
+
+.sign-up:hover {
+  background-color: #52b670;
 }
