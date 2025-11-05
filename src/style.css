@@ -319,12 +319,21 @@ body.light .footer {
     width: 150px;
   }
 }
+/* login-page style */
 
+.logo-loginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 200px;
+  height: auto;
+}
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
 
 /* Glowing circle animation */
 .glow-ring {
-  position: absolute;
+  display: flex;
   width: 350px;
   height: 350px;
   border-radius: 50%;
@@ -332,6 +341,9 @@ body.light .footer {
   filter: blur(20px);
   animation: rotate 5s linear infinite;
   z-index: 0;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
 }
 
 @keyframes rotate {
@@ -345,8 +357,9 @@ body.light .footer {
 
 /* Login box */
 #Login-page {
-  position: static;
-  background:  #ebebdf;
+  display: flex;
+  flex-direction: column;
+  background: #ebebdf;
   padding: 40px;
   border-radius: 20px;
   text-align: center;
@@ -355,9 +368,6 @@ body.light .footer {
   width: 320px;
   color: #000;
 }
-
-
-
 
 .login-text {
   font-size: 24px;
