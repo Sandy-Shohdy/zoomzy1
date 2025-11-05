@@ -319,3 +319,114 @@ body.light .footer {
     width: 150px;
   }
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+/* Glowing circle animation */
+.glow-ring {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: conic-gradient(#ff005e, #ffcc00, #00ff99, #ff005e);
+  filter: blur(20px);
+  animation: rotate 5s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Login box */
+#Login-page {
+  position: static;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+  z-index: 1;
+  width: 320px;
+}
+
+.login-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Input styling */
+label {
+  font-size: 14px;
+  display: block;
+  margin: 10px 0 5px;
+  text-align: left;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  background: #111;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.login {
+  background: linear-gradient(90deg, #ff005e, #ffcc00);
+  margin-bottom: 10px;
+}
+
+.login:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ffcc00;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+/* Social login buttons */
+.login-google,
+.login-apple {
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.login-google img,
+.login-apple img {
+  width: 20px;
+  height: 20px;
+}
+
+.login-google:hover,
+.login-apple:hover {
+  background: #222;
+}
