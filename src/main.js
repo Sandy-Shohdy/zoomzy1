@@ -6,6 +6,10 @@ toggle.addEventListener("click", () => {
   toggle.classList.toggle("light", isLight);
 });
 
+
+// login-page
+  
+
 const app = document.querySelector("#app");
 let page = 1; // start from page 1
 const totalPages = 20; // we know there are 20 pages total
