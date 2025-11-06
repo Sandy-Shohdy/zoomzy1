@@ -85,6 +85,8 @@ function renderPhotoCard(photo) {
     </div>
   `;
 
+  card.querySelector("img").style.height = `${200 + Math.random() * 150}px`; /*gives each image a random height between 200px–350px for a more natural pinterest flow*/ 
+
   setupLike(card);
   setupComments(card);
   return card;
@@ -156,6 +158,11 @@ function setupComments(card) {
 async function loadPhotos() {
   const photos = await fetchPhotos(page);
   photos.forEach((photo) => app.appendChild(renderPhotoCard(photo)));
+  setTimeout(() => {
+    app.style.display = "none";
+    app.offsetHeight; // triggers reflow
+    app.style.display = "block";
+  }, 200);
 }
 
 // 🔁 Load more button
