@@ -23,9 +23,15 @@ body {
   min-height: 100vh; /* makes it take up full viewport height */
   padding-left: 70px; /* space for side-header */
   transition: background-color 0.3s, color 0.3s;
+  justify-content: center; /* centers vertically */
+  min-height: 100vh;
 }
 main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centers vertically within main */
+  align-items: center;
 }
 
 body.light {
@@ -142,7 +148,7 @@ body.light .navigation img {
 #app {
   display: block !important;
   column-count: 3; /*3 uneven columns */
-  column-gap: 1rem;   /*spacing between the column*/
+  column-gap: 1rem; /*spacing between the column*/
   padding: 1.5rem;
   width: 90%;
   max-width: 1200px;
@@ -175,10 +181,10 @@ This prevents the flexbox content from “breaking” the column structure.*/
 .photo-card:nth-child(3n) img {
   height: 200px;
 }
-.photo-card:nth-child(3n+1) img {
+.photo-card:nth-child(3n + 1) img {
   height: 300px;
 }
-.photo-card:nth-child(3n+2) img {
+.photo-card:nth-child(3n + 2) img {
   height: 250px;
 }
 
@@ -186,8 +192,6 @@ This prevents the flexbox content from “breaking” the column structure.*/
   transform: translateY(-6px) rotateZ(0.3deg);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
-
-
 
 .photo-card:hover img {
   transform: scale(1.05);
@@ -291,28 +295,10 @@ This prevents the flexbox content from “breaking” the column structure.*/
   transform: scale(1.05);
 }
 
-/************ FOOTER *************/
-.footer {
-  display: flex; /* pushes it to the bottom*/
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  padding: 20px;
-  background-color: #ebebdf;
-  color: #0c0000;
-  text-align: center;
-  margin-top: auto; /* pushes it to the bottom*/
-}
-
-body.light .footer {
-  background-color: #032a13;
-  color: #fff;
-}
-
 /* RESPONSIVE BREAKPOINTS */
 @media (max-width: 1000px) {
   #app {
-    column-count: 2;        /* 2 columns on medium screens */
+    column-count: 2; /* 2 columns on medium screens */
   }
 }
 
@@ -346,7 +332,23 @@ body.light .footer {
   }
 }
 
+/************ FOOTER *************/
+.footer {
+  display: flex; /* pushes it to the bottom*/
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  padding: 20px;
+  background-color: #ebebdf;
+  color: #0c0000;
+  text-align: center;
+  margin-top: auto; /* pushes it to the bottom*/
+}
 
+body.light .footer {
+  background-color: #032a13;
+  color: #fff;
+}
 #myBtn {
   display: none; /*hidden by default*/
   position: fixed;

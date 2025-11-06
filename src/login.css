@@ -1,0 +1,421 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+:root {
+  --bg-dark: #000;
+  --accent-green: #5e8c31;
+  --text-light: #fff;
+  --hover-blue: #646cff;
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  background-color: #00000e;
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* makes it take up full viewport height */
+  padding-left: 70px; /* space for side-header */
+  transition: background-color 0.3s, color 0.3s;
+  justify-content: center; /* centers vertically */
+  min-height: 100vh;
+}
+body.light {
+  background-color: #f8f8fb;
+  color: black;
+}
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centers vertically within main */
+  align-items: center;
+}
+
+/* TOGGLE */
+#toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 20px;
+  border-radius: 34px;
+  background-color: #f9f2f2;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 1100;
+}
+
+#toggle::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #52b670;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s;
+}
+
+#toggle.light {
+  background-color: rgb(12, 0, 0);
+}
+#toggle.light::before {
+  transform: translateX(30px);
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: -30px;
+  margin-bottom: -50px;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+}
+
+/* SIDE HEADER */
+.side-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 100vh;
+  background-color: #ebebdf;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+  gap: 30px;
+  z-index: 1000;
+  transition: background-color 0.3s;
+}
+
+body.light .side-header {
+  background-color: #032a13;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.navigation img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.navigation img:hover {
+  transform: scale(1.1);
+}
+
+body.light .navigation img {
+  filter: invert(1);
+}
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 1000px) {
+  #app {
+    column-count: 2; /* 2 columns on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-left: 0;
+  }
+  .side-header {
+    position: relative;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  .navigation {
+    flex-direction: row;
+    gap: 20px;
+  }
+  #home {
+    flex-direction: column;
+    padding: 10px;
+  }
+  #app {
+    column-count: 1; /* 1 uneven column on mobile */
+    column-gap: 1rem;
+    padding: 1rem;
+  }
+  .logo {
+    width: 150px;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+.glow-ring {
+  width: 320px;
+  height: 350px;
+  background: conic-gradient(#ff005e, #ffcc00, #00ff99, #ff005e);
+  filter: blur(50px);
+  width: 320px;
+  color: #000;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.light .glow-ring {
+  background: conic-gradient(#75012c, #5b4900, #00492c, #0e0105);
+}
+
+/* Login box */
+#Login-page {
+  background: #ebebdf;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+  width: 320px;
+  color: #000;
+  margin: 10px auto 50px; /* space from logo (top) and footer (bottom) */
+  position: relative; /* no longer fixed */
+  z-index: 1;
+  max-width: calc(90% - 40px);
+}
+
+body.light #Login-page {
+  background: #032a13;
+  color: #fff;
+}
+
+.login-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Input styling */
+label {
+  font-size: 14px;
+  display: block;
+  margin: 10px 0 5px;
+  text-align: left;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  background: #111;
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+body.light input[type="email"],
+body.light input[type="password"] {
+  background: #f0f0f0;
+  color: #000;
+}
+
+/* Buttons */
+
+.login {
+  background: linear-gradient(90deg, #ff005e, #ffcc00);
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.login:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ffcc00;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+/* Social login buttons */
+.login-google,
+.login-apple {
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.login-google img,
+.login-apple img {
+  width: 20px;
+  height: 20px;
+}
+
+.login-google:hover,
+.login-apple:hover {
+  background: #650101;
+  transform: scale(1.05);
+}
+
+body.light .login-google,
+body.light .login-apple {
+  background: #f0f0f0;
+  color: #000;
+}
+/************ FOOTER *************/
+.footer {
+  display: flex; /* pushes it to the bottom*/
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  padding: 20px;
+  background-color: #ebebdf;
+  color: #0c0000;
+  text-align: center;
+  margin-top: auto; /* pushes it to the bottom*/
+}
+
+body.light .footer {
+  background-color: #032a13;
+  color: #fff;
+}
+#myBtn {
+  display: none; /*hidden by default*/
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 15px;
+  font-size: 50px;
+}
