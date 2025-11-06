@@ -189,3 +189,22 @@ async function init() {
 }
 
 init();
+
+// scroll to top button //
+let myButton = document.getElementById("myBtn");
+
+window.onscroll = function() {scrollFunction()};
+ 
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    myButton.style.display = "block";
+  } else {
+    myButton.style.display = "none";
+  }
+}
+
+function topFunction() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+myButton.addEventListener("click", topFunction);
