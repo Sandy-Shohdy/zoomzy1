@@ -23,9 +23,15 @@ body {
   min-height: 100vh; /* makes it take up full viewport height */
   padding-left: 70px; /* space for side-header */
   transition: background-color 0.3s, color 0.3s;
+  justify-content: center; /* centers vertically */
+  min-height: 100vh;
 }
 main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centers vertically within main */
+  align-items: center;
 }
 
 body.light {
@@ -289,24 +295,6 @@ This prevents the flexbox content from “breaking” the column structure.*/
   transform: scale(1.05);
 }
 
-/************ FOOTER *************/
-.footer {
-  display: flex; /* pushes it to the bottom*/
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  padding: 20px;
-  background-color: #ebebdf;
-  color: #0c0000;
-  text-align: center;
-  margin-top: auto; /* pushes it to the bottom*/
-}
-
-body.light .footer {
-  background-color: #032a13;
-  color: #fff;
-}
-
 /* RESPONSIVE BREAKPOINTS */
 @media (max-width: 1000px) {
   #app {
@@ -343,138 +331,24 @@ body.light .footer {
     width: 150px;
   }
 }
-/* login-page style */
 
-.logo-loginPage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  width: 200px;
-  height: auto;
-}
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
-
-/* Glowing circle animation */
-.glow-ring {
-  display: flex;
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  background: conic-gradient(#ff005e, #ffcc00, #00ff99, #ff005e);
-  filter: blur(20px);
-  animation: rotate 5s linear infinite;
-  z-index: 0;
-  align-items: center;
+/************ FOOTER *************/
+.footer {
+  display: flex; /* pushes it to the bottom*/
   justify-content: center;
-  justify-items: center;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Login box */
-#Login-page {
-  display: flex;
-  flex-direction: column;
-  background: #ebebdf;
-  padding: 40px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
-  z-index: 1;
-  width: 320px;
-  color: #000;
-}
-
-.login-text {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-/* Input styling */
-label {
-  font-size: 14px;
-  display: block;
-  margin: 10px 0 5px;
-  text-align: left;
-}
-
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  outline: none;
-  background: #111;
-  color: #fff;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-/* Buttons */
-
-.login {
-  background: linear-gradient(90deg, #ff005e, #ffcc00);
-  margin-bottom: 10px;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  color: #fff;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-.login:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #ffcc00;
-}
-
-p {
-  margin: 10px 0;
-  font-size: 14px;
-}
-
-/* Social login buttons */
-.login-google,
-.login-apple {
-  background: #111;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 10px;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
+  font-size: 14px;
+  padding: 20px;
+  background-color: #ebebdf;
+  color: #0c0000;
+  text-align: center;
+  margin-top: auto; /* pushes it to the bottom*/
+}
+
+body.light .footer {
+  background-color: #032a13;
   color: #fff;
-  font-weight: 600;
-  transition: 0.3s;
 }
-
-.login-google img,
-.login-apple img {
-  width: 20px;
-  height: 20px;
-}
-
-.login-google:hover,
-.login-apple:hover {
-  background: #222;
-}
-
 #myBtn {
   display: none; /*hidden by default*/
   position: fixed;
