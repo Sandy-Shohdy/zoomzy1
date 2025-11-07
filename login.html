@@ -2,90 +2,75 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login-page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login page</title>
 </head>
 <header class="side-header">
-    <nav class="navigation">
-        <a href="index.html"><img src="img/icons8-home-64.png" alt="home" /></a>
-        <a href="index.html">
-            <img src="img/icons8-gallery-64.png" alt="gallery" /></a>
-        <a href="login"><img src="img/icons8-login-50.png" alt="login" /></a>
-    </nav>
-    <link rel="stylesheet" href="/src/style.css" />
-
+  <nav class="navigation">
+    <a href="index.html"><img src="img/icons8-home-64.png" alt="home" /></a>
+    <a href="index.html">
+      <img src="img/icons8-gallery-64.png" alt="gallery" /></a>
+    <a href="login"><img src="img/icons8-login-50.png" alt="login" /></a>
+  </nav>
+  <link rel="stylesheet" href="src/login.css" />
 </header>
 
 <body>
+  <div id="toggle" class="theme-toggle"></div>
 
 
+  <div class="logo-container">
+  <img class="logo" src="img/zoomzy logo.png" alt="logo" />
+  </div>
 
 
-    <div id="toggle" class="theme-toggle">
+  <div class="glow-ring"></div>
+
+  <section id="Login-page"> 
+    <p class="login-text">Login</p>
+    
+    <form action="email">
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email.input" placeholder="Email" />
+    </form>
+
+    <form action="password">
+      <label for="email">Password</label>
+      <input type="password" id="pass" name="password" minlength="8" required placeholder="password" />
+    </form>
+
+    <button class="login">Log in</button>
+
+    <p>OR</p>
+
+    <button class="login-google">
+      <img src="img/icons8-google-logo-48.png" alt="google" />
+      <p>Continue with Google</p>
+    </button>
+
+    <button class="login-apple">
+      <img src="img/icons8-apple-logo-48.png" alt="apple" />
+      <p>Continue with Apple</p>
+    </button>
+
+    <div class="goTo-signupPage">
+      <p>Not on ZoomZy yet? <a href="signup.html">Sign up</a></p>
     </div>
+  </section>
+
+  <script type="module" src="/src/main.js"></script>
 
 
 
+  <footer class="footer">
+    <p>© 2025 Zoomzy — made by Team 3. Hyper Island.</p>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 
 
-    <section id="home">
-        <div class="logo-container">
-            <img class="logo" src="img/zoomzy logo.png" alt="logo" />
-        </div>
-
-
-
-
-        <section id="Login-page">
-
-            <p class="  login-text">
-                Login or Register </p>
-
-
-            <div class="profile-pic-div" id="input_field">
-                <input type="file" class="myfile" id="imgfile" accept="image/png, image/jpg">
-            </div>
-            <form action="First-name">
-                <label for="name">First name</label> <br>
-                <input type="text">
-            </form>
-
-            <form action="last-name">
-                <label for="name">Last name</label> <br>
-                <input type="text">
-            </form>
-
-            <form action="email">
-                <label for="email">Email</label> <br>
-                <input type="text">
-            </form>
-
-            <form action="password">
-                <label for="email">Password</label> <br>
-                <input type="password" id="pass" name="password" minlength="8" required />
-            </form>
-            <button class="login">
-                Log in
-            </button>
-            <p> OR</p>
-
-            <button class="login-google">
-                <img src="img/icons8-google-logo-48.png" alt="google">
-                <p> Continue with Google</p>
-            </button>
-
-            <button class="login-apple">
-                <img src="img/icons8-apple-logo-48.png" alt="apple">
-                <p> Continue with Apple</p>
-            </button>
-        </section>
-
-        <footer class="footer">
-            <p>© 2025 Zoomzy — made with ❤️ by Team 3</p>
-        </footer>
-
-        <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
