@@ -1,14 +1,13 @@
 // Fetch photos from the API
-export function fetchPhotos(page) {
-  return fetch(`https://image-feed-api.vercel.app/api/images?page=${page}`)
-    .then((res) => {
-      if (!res.ok) throw new Error("Failed to load photos"); //more info about how .ok works on: https://developer.mozilla.org/en-US/docs/Web/API/Response/ok
-      return res.json();
-    })
-    .then((json) => json.data)
-    .catch((error) => {
-      console.error("There was a problem fetching images:", error); //in the browser console we will see this message if there is an error.
+export async function fetchPhotos(page) {
+  try {
+    const res = await fetch(`https://image-feed-api.vercel.app/api/images?page=${page}`);
+    if (!res.ok) throw new Error("Failed to load photos");
 
-      app.innerHTML = `<p style="color:red;">Failed to load photos</p>`; //display message in the app area
-    });
+    const json = await res.json();
+    return json.data; // ⬅️ pick only "data" array
+  } catch (error) {
+    console.error("There was a problem fetching images:", error);
+    app.innerHTML = `<p style="color:red;">Failed to load photos</p>`;
+  }
 }
