@@ -1,3 +1,5 @@
+import { fetchPhotos } from "./fetch.js";
+
 const toggle = document.getElementById("toggle");
 const body = document.body;
 
@@ -9,21 +11,6 @@ toggle.addEventListener("click", () => {
 const app = document.querySelector("#app");
 let page = 1; // start from page 1
 const totalPages = 20; // we know there are 20 pages total
-
-// Fetch photos from the API
-function fetchPhotos(page) {
-  return fetch(`https://image-feed-api.vercel.app/api/images?page=${page}`)
-    .then((res) => {
-      if (!res.ok) throw new Error("Failed to load photos"); //more info about how .ok works on: https://developer.mozilla.org/en-US/docs/Web/API/Response/ok
-      return res.json();
-    })
-    .then((json) => json.data)
-    .catch((error) => {
-      console.error("There was a problem fetching images:", error); //in the browser console we will see this message if there is an error.
-
-      app.innerHTML = `<p style="color:red;">Failed to load photos</p>`; //display message in the app area
-    });
-}
 
 const randomAuthors = [
   "Luna Rivera",
@@ -41,9 +28,48 @@ const randomAuthors = [
   "Theo Martins",
   "Maya Chen",
   "Noah Patel",
+   "Luna Rivera",
+  "Kai Nakamur",
+  "Mila Novak",
+  "Omar Hassan",
+  "Sophie Laurent",
+  "Ethan Kim",
+  "Ava Rossi",
+  "Leo Carter",
+  "Zara Ali",
+  "Nina Johansson",
+  "Felix Moreau",
+  "Isla Becker",
+  "Theo Martins",
+  "Maya Chen",
+  "Noah Patel",
+  "Elena Garcia",
+  "Jonas Weber",
+  "Aria Silva",
+  "Mateo Cruz",
+  "Yuna Takahashi",
+  "Gabriel Sousa",
+  "Clara Müller",
+  "Ravi Sharma",
+  "Layla Haddad",
+  "Sebastian Torres",
+  "Ines Dubois",
+  "Luca Marino",
+  "Amira Khan",
+  "Jasper Nguyen",
+  "Talia Cohen",
+  "Emil Novak",
+  "Hana Petrovic",
+  "Owen Brooks",
+  "Sienna Park",
+  "Malik Ibrahim",
+  "Freya Lindgren",
+  "Diego Santos",
+  "Iris Tanaka",
+  "Liam Andersen"
 ]; // Random author names
 
-// 🖼️ Render each photo card
+// Render each photo card
 function renderPhotoCard(photo) {
   const card = document.createElement("div");
   card.className = "photo-card";
@@ -59,10 +85,10 @@ function renderPhotoCard(photo) {
 
     <div class="photo-actions">
       <button class="like-btn" data-id="${photo.id}">
-        ❤️ <span class="like-count">${photo.likes_count || 0}</span>
+        <span class="like-count">${photo.likes_count || 0}</span>
       </button>
       <button class="comment-btn-toggle">
-        💬 <span class="comment-count">${photo.comments?.length || 0}</span>
+         <span class="comment-count">${photo.comments?.length || 0}</span>
       </button>
     </div>
 
@@ -88,7 +114,7 @@ function renderPhotoCard(photo) {
   return card;
 }
 
-// ❤️ Like handling (local + API)
+// Like handling (local + API)
 function setupLike(card) {
   const btn = card.querySelector(".like-btn");
   const countSpan = card.querySelector(".like-count");
@@ -111,7 +137,7 @@ function setupLike(card) {
   });
 }
 
-// 💬 Comments handling (local + API)
+// Comments handling (local + API)
 function setupComments(card) {
   const section = card.querySelector(".comment-section");
   const input = card.querySelector(".comment-input input");
@@ -161,7 +187,7 @@ async function loadPhotos() {
   }, 200);
 }
 
-// 🔁 Load more button
+// Load more button
 async function setupLoadMore() {
   const btn = document.createElement("button");
   btn.id = "load-more";
