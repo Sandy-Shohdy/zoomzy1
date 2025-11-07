@@ -1,14 +1,21 @@
+// theme toggle
 const toggle = document.getElementById("toggle");
 const body = document.body;
 
-toggle.addEventListener("click", () => {
+// 1. Check and apply saved theme
+if (localStorage.getItem("theme") === "light") {
+  body.classList.add("light");
+  toggle.classList.add("light");
+}
+
+// 2. Toggle on click
+toggle.onclick = () => {
   const isLight = body.classList.toggle("light");
   toggle.classList.toggle("light", isLight);
-});
 
-
-// login-page
-  
+  // 3. Save the current theme
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+};
 
 const app = document.querySelector("#app");
 let page = 1; // start from page 1
@@ -54,7 +61,8 @@ function renderPhotoCard(photo) {
   card.dataset.id = photo.id;
 
   const authorName =
-    photo.author || randomAuthors[Math.floor(Math.random() * randomAuthors.length)]; // Use random author, because none is provided by the API
+    photo.author ||
+    randomAuthors[Math.floor(Math.random() * randomAuthors.length)]; // Use random author, because none is provided by the API
 
   card.innerHTML = `
     <img src="${photo.image_url}" alt="Photo ${photo.id}" />
@@ -85,7 +93,9 @@ function renderPhotoCard(photo) {
     </div>
   `;
 
-  card.querySelector("img").style.height = `${200 + Math.random() * 150}px`; /*gives each image a random height between 200px–350px for a more natural pinterest flow*/ 
+  card.querySelector("img").style.height = `${
+    200 + Math.random() * 150
+  }px`; /*gives each image a random height between 200px–350px for a more natural pinterest flow*/
 
   setupLike(card);
   setupComments(card);
@@ -200,8 +210,10 @@ init();
 // scroll to top button //
 let myButton = document.getElementById("myBtn");
 
-window.onscroll = function() {scrollFunction()};
- 
+window.onscroll = function () {
+  scrollFunction();
+};
+
 function scrollFunction() {
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     myButton.style.display = "block";
@@ -211,7 +223,7 @@ function scrollFunction() {
 }
 
 function topFunction() {
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 myButton.addEventListener("click", topFunction);
