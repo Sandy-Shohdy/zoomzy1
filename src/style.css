@@ -1,3 +1,8 @@
+@import "./styles/features/comments.css";
+@import "./styles/features/likes.css";
+@import "./styles/features/loadmore.css";
+
+/* Root variables */
 :root {
   --bg-dark: #000;
   --accent-green: #5e8c31;
@@ -8,29 +13,31 @@
   font-weight: 400;
 }
 
+/* Global reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Body & layout */
 body {
   margin: 0;
   background-color: #00000e;
   color: var(--text-light);
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* makes it take up full viewport height */
+  justify-content: center;
+  min-height: 100vh;
   padding-left: 70px; /* space for side-header */
   transition: background-color 0.3s, color 0.3s;
-  justify-content: center; /* centers vertically */
-  min-height: 100vh;
 }
+
 main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centers vertically within main */
+  justify-content: center;
   align-items: center;
 }
 
@@ -39,7 +46,7 @@ body.light {
   color: black;
 }
 
-/* TOGGLE */
+/* THEME TOGGLE */
 #toggle {
   position: absolute;
   top: 20px;
@@ -68,11 +75,12 @@ body.light {
 #toggle.light {
   background-color: rgb(12, 0, 0);
 }
+
 #toggle.light::before {
   transform: translateX(30px);
 }
 
-/* SIDE HEADER */
+/*  SIDE HEADER */
 .side-header {
   position: fixed;
   top: 0;
@@ -115,17 +123,17 @@ body.light .navigation img {
   filter: invert(1);
 }
 
-/* HOME SECTION */
+/*  HOME SECTION */
 #home {
   display: flex;
-  flex-direction: column; /* places logo at the top, not next to form */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   max-width: 1200px;
   margin: 20px auto;
   text-align: center;
   padding: 0 20px;
-  flex: 1; /* expands and fills available space */
+  flex: 1;
 }
 
 .logo-container {
@@ -140,15 +148,15 @@ body.light .navigation img {
   height: auto;
 }
 
-/* GALLERY */
+/* 🖼️ GALLERY */
 #gallery {
   width: 100%;
 }
 
 #app {
   display: block !important;
-  column-count: 3; /*3 uneven columns */
-  column-gap: 1rem; /*spacing between the column*/
+  column-count: 3;
+  column-gap: 1rem;
   padding: 1.5rem;
   width: 90%;
   max-width: 1200px;
@@ -156,18 +164,59 @@ body.light .navigation img {
 }
 
 .photo-card {
-  display: inline-block; /*cards behave like blocks inside columns*/
-  width: 100%; /*each card fills column width */
-  break-inside: avoid; /*prevents card from breaking between columns */
+  position: relative; /* ❤️ floating hearts can appear correctly inside the card */
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
   background-color: #111;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-bottom: 1rem;
-  contain: layout paint; /*tells the browser to isolate the card’s internal layout from the outer flow.
-This prevents the flexbox content from “breaking” the column structure.*/
+  contain: layout paint;
 }
+/* 📸 Author section (name area below photo) */
+.author {
+  padding: 0.75rem 1rem 0;
+  font-weight: 600;
+  font-size: 1rem;
+  background-color: #111; /* dark mode default */
+  color: #fff;
+  text-align: left;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 🌞 Light theme fix for author area */
+body.light .author {
+  background-color: #f0f0f0;
+  color: #111;
+}
+
+/* 🎛 Photo actions (like & comment bar) */
+.photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid #222;
+  background-color: #111;
+  color: #ccc;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light .photo-actions {
+  background-color: #f0f0f0;
+  border-top: 1px solid #ddd;
+  color: #333;
+}
+
+
+/* 🌞 Light theme adjustment */
+body.light .author {
+  color: #111; /* dark text for light mode */
+}
+
 
 .photo-card img {
   width: 100%;
@@ -177,7 +226,7 @@ This prevents the flexbox content from “breaking” the column structure.*/
   object-fit: cover;
 }
 
-/* 🎨 Add variation to image height for that uneven, Pinterest look */
+/*  Uneven Pinterest look */
 .photo-card:nth-child(3n) img {
   height: 200px;
 }
@@ -197,6 +246,7 @@ This prevents the flexbox content from “breaking” the column structure.*/
   transform: scale(1.05);
 }
 
+/*  Author text */
 .author {
   padding: 0.75rem 1rem 0;
   font-weight: 600;
@@ -205,100 +255,10 @@ This prevents the flexbox content from “breaking” the column structure.*/
   text-align: left;
 }
 
-.photo-actions {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1.2rem;
-  padding: 0.75rem 1rem;
-  border-top: 1px solid #222;
-}
-
-.like-btn,
-.comment-btn-toggle {
-  background: none;
-  border: none;
-  font-size: 1.3rem;
-  cursor: pointer;
-  color: #ccc;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: transform 0.2s, color 0.3s;
-}
-
-.like-btn:hover,
-.comment-btn-toggle:hover {
-  transform: scale(1.15);
-}
-
-.like-btn.liked {
-  color: #ff4d4d;
-}
-
-.comment-section {
-  padding: 0.75rem 1rem 1rem;
-  border-top: 1px solid #222;
-}
-
-.comment-list {
-  list-style: none;
-  max-height: 100px;
-  overflow-y: auto;
-  color: #ddd;
-}
-
-.comment-input {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.comment-input input {
-  flex: 1;
-  padding: 0.4rem;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background: #2a2a2a;
-  color: #fff;
-}
-
-.comment-input button {
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  background-color: var(--hover-blue);
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.comment-input button:hover {
-  background-color: #535bf2;
-}
-
-#load-more {
-  display: block;
-  margin: 2rem auto;
-  padding: 0.9rem 2.5rem;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-size: 1.05rem;
-  font-weight: 600;
-  background-color: var(--hover-blue);
-  color: white;
-  transition: background 0.3s, transform 0.2s;
-}
-
-#load-more:hover {
-  background-color: #535bf2;
-  transform: scale(1.05);
-}
-
-/* RESPONSIVE BREAKPOINTS */
+/*  Responsive breakpoints */
 @media (max-width: 1000px) {
   #app {
-    column-count: 2; /* 2 columns on medium screens */
+    column-count: 2;
   }
 }
 
@@ -306,6 +266,7 @@ This prevents the flexbox content from “breaking” the column structure.*/
   body {
     padding-left: 0;
   }
+
   .side-header {
     position: relative;
     width: 100%;
@@ -314,27 +275,31 @@ This prevents the flexbox content from “breaking” the column structure.*/
     justify-content: center;
     padding: 10px 0;
   }
+
   .navigation {
     flex-direction: row;
     gap: 20px;
   }
+
   #home {
     flex-direction: column;
     padding: 10px;
   }
+
   #app {
-    column-count: 1; /* 1 uneven column on mobile */
+    column-count: 1;
     column-gap: 1rem;
     padding: 1rem;
   }
+
   .logo {
     width: 150px;
   }
 }
 
-/************ FOOTER *************/
+/************  FOOTER *************/
 .footer {
-  display: flex; /* pushes it to the bottom*/
+  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 14px;
@@ -342,15 +307,16 @@ This prevents the flexbox content from “breaking” the column structure.*/
   background-color: #ebebdf;
   color: #0c0000;
   text-align: center;
-  margin-top: auto; /* pushes it to the bottom*/
+  margin-top: auto;
 }
 
 body.light .footer {
   background-color: #032a13;
   color: #fff;
 }
+
 #myBtn {
-  display: none; /*hidden by default*/
+  display: none;
   position: fixed;
   bottom: 20px;
   right: 30px;

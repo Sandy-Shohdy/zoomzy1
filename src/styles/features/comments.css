@@ -1,40 +1,178 @@
+/* src/styles/features/comments.css */
+
+/* 🔽 Comment section container */
 .comment-section {
-  padding: 0.75rem 1rem 1rem;
-  border-top: 1px solid #222;
+  display: none;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+  background-color: #111; /* Dark mode background */
 }
 
+/* 🌞 Light mode background */
+body.light .comment-section {
+  background-color: #f2f2f2;
+}
+
+/* 💬 Comment list */
 .comment-list {
   list-style: none;
-  max-height: 100px;
-  overflow-y: auto;
-  color: #ddd;
+  padding: 0;
+  margin: 0 0 10px 0;
 }
 
+.comment-list li {
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: #ddd;
+  transition: color 0.3s ease;
+}
+
+/* 🌞 Light mode text color */
+body.light .comment-list li {
+  color: #333;
+}
+
+/* 🧾 Comment input area */
 .comment-input {
   display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 8px;
 }
 
 .comment-input input {
   flex: 1;
-  padding: 0.4rem;
-  border-radius: 6px;
-  border: 1px solid #444;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
   background: #2a2a2a;
   color: #fff;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* 🌞 Light mode input */
+body.light .comment-input input {
+  background: #f0f0f0;
+  color: #000;
+}
+
+/* 🩶 Placeholder colors */
+.comment-input input::placeholder {
+  color: #aaa;
+}
+
+body.light .comment-input input::placeholder {
+  color: #777;
+}
+
+/* 🟢 Post button */
+/* 🩶 Minimal transparent Post button (same as Load More) */
 .comment-input button {
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  background-color: var(--hover-blue);
-  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 10px;
+  padding: 6px 18px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+/* Hover efekti */
+.comment-input button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+/* Light mode */
+body.light .comment-input button {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #111;
+}
+
+body.light .comment-input button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+
+/* 🧷 Comment & Like button alignment */
+.photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+/* Border tone for dark/light */
+body.light .photo-actions {
+  border-color: #ddd;
+}
+body:not(.light) .photo-actions {
+  border-color: #222;
+}
+
+/* 💬 Comment toggle button */
+.comment-btn-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 1.3rem;
+  color: #ccc;
+  background: none;
   border: none;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: transform 0.2s, color 0.3s;
 }
 
-.comment-input button:hover {
-  background-color: #535bf2;
+.comment-btn-toggle:hover {
+  transform: scale(1.15);
+}
+
+/* 💭 Floating comment bubble animation */
+.floating-bubble {
+  position: absolute;
+  font-size: 1.2rem;
+  animation: bubble-up 1.2s ease-out forwards;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 20;
+  user-select: none;
+}
+
+@keyframes bubble-up {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(calc(-10px + 20px * var(--rand-dir, 1)), -40px)
+      scale(1.2);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(calc(-20px + 40px * var(--rand-dir, 1)), -80px)
+      scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* 🩶 Fix for subtle dark border bleed */
+.photo-card {
+  overflow: hidden;
+  background-clip: padding-box;
+}
+
+/* Theme-consistent card colors */
+body.light .photo-card {
+  background-color: #f9f9f9;
+}
+
+body:not(.light) .photo-card {
+  background-color: #111;
 }
