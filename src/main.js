@@ -17,6 +17,8 @@ toggle.onclick = () => {
   localStorage.setItem("theme", isLight ? "light" : "dark");
 };
 
+
+
 const app = document.querySelector("#app");
 let page = 1; // start from page 1
 const totalPages = 20; // we know there are 20 pages total

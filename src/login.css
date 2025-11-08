@@ -309,6 +309,9 @@ label {
   text-align: left;
 }
 
+div.incorrect label {
+  background-color: #f06272;
+}
 input[type="email"],
 input[type="password"] {
   width: 100%;
@@ -328,6 +331,9 @@ body.light input[type="password"] {
   color: #000;
 }
 
+#error-message {
+  color: #f06272;
+}
 /* Buttons */
 
 .login {
