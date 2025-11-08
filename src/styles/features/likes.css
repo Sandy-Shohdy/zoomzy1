@@ -1,0 +1,28 @@
+/* --- Like Button (clean, stable) --- */
+@import url("./styles/features/likes.css");
+@import url("./styles/features/comments.css");
+
+
+.like-btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.like-btn:hover {
+  transform: scale(1.12);
+}
+
+.like-btn.liked {
+  color: #ff4d4d;
+}
+
+.like-count {
+  font-size: 0.9rem;
+}

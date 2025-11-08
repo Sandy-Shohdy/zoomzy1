@@ -1,0 +1,40 @@
+.comment-section {
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid #222;
+}
+
+.comment-list {
+  list-style: none;
+  max-height: 100px;
+  overflow-y: auto;
+  color: #ddd;
+}
+
+.comment-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.comment-input input {
+  flex: 1;
+  padding: 0.4rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.comment-input button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  background-color: var(--hover-blue);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.comment-input button:hover {
+  background-color: #535bf2;
+}
