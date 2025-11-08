@@ -19,8 +19,6 @@ toggle.onclick = () => {
   localStorage.setItem("theme", isLight ? "light" : "dark");
 };
 
-
-
 const app = document.querySelector("#app");
 let page = 1; // start from page 1
 const totalPages = 20; // we know there are 20 pages total
@@ -44,7 +42,7 @@ async function setupLoadMore() {
 
   const loading = document.createElement("div");
   loading.id = "loading";
-  loading.textContent = "Loading...";
+  loading.textContent = "";
 
   const main = document.querySelector("main");
   main.appendChild(btn);
