@@ -285,16 +285,25 @@ This prevents the flexbox content from “breaking” the column structure.*/
   cursor: pointer;
   font-size: 1.05rem;
   font-weight: 600;
-  background-color: var(--hover-blue);
-  color: white;
+  background-color: #ebebdf;
+  color: rgb(2, 0, 0);
   transition: background 0.3s, transform 0.2s;
 }
 
 #load-more:hover {
-  background-color: #535bf2;
+  background-color: #03ae4a;
   transform: scale(1.05);
 }
 
+body.light #load-more {
+  background-color: #032a13;
+  color: #fff;
+}
+
+body.light #load-more:hover {
+  background-color: #069d45;
+  transform: scale(1.05);
+}
 /* RESPONSIVE BREAKPOINTS */
 @media (max-width: 1000px) {
   #app {
