@@ -35,7 +35,8 @@ export function setupComments(card) {
       const bubble = document.createElement("span");
       bubble.classList.add("floating-bubble");
       bubble.textContent = "💭";
-      card.appendChild(bubble);
+      section.appendChild(bubble);
+
 
       // Random starting position near the post button
       const randomX = postBtn.offsetLeft + Math.random() * 40 - 10;
