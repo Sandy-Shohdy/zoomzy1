@@ -1,9 +1,8 @@
-// main.js
 import { fetchPhotos } from "./fetch.js";
 import { renderPhotoCard } from "./renderPhotoCard.js";
 import { setupLoadMore } from "./features/loadmore.js";
 
-// 🌗 THEME TOGGLE (Sandy's feature)
+// THEME TOGGLE
 const toggle = document.getElementById("toggle");
 const body = document.body;
 
@@ -18,51 +17,9 @@ toggle.onclick = () => {
   localStorage.setItem("theme", isLight ? "light" : "dark");
 };
 
-<<<<<<< HEAD
-=======
-// 🖼️ GALLERY & LOAD MORE
->>>>>>> feature/comments
+// GALLERY & LOAD MORE
 const app = document.querySelector("#app");
 
-<<<<<<< HEAD
-// Load and display photos
-async function loadPhotos() {
-  const photos = await fetchPhotos(page);
-  photos.forEach((photo) => app.appendChild(renderPhotoCard(photo)));
-  setTimeout(() => {
-    app.style.display = "none";
-    app.offsetHeight; // triggers reflow
-    app.style.display = "block";
-  }, 200);
-}
-
-// Load more button
-async function setupLoadMore() {
-  const btn = document.createElement("button");
-  btn.id = "load-more";
-  btn.textContent = "Load more pictures";
-
-  const loading = document.createElement("div");
-  loading.id = "loading";
-  loading.textContent = "";
-
-  const main = document.querySelector("main");
-  main.appendChild(btn);
-  main.appendChild(loading);
-
-  btn.addEventListener("click", async () => {
-    btn.disabled = true;
-    loading.style.display = "block";
-    page++;
-    await loadPhotos();
-    loading.style.display = "none";
-    btn.disabled = false;
-  });
-}
-
-// 🚀 Initialize
-=======
->>>>>>> feature/comments
 async function init() {
   const photos = await fetchPhotos(1);
   photos.forEach((photo) => app.appendChild(renderPhotoCard(photo)));
@@ -71,7 +28,7 @@ async function init() {
 
 init();
 
-// 🔝 SCROLL TO TOP BUTTON (Simman's feature)
+// SCROLL TO TOP BUTTON
 let myButton = document.getElementById("myBtn");
 
 window.onscroll = function () {
