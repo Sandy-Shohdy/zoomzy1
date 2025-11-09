@@ -1,0 +1,121 @@
+/* 🔲 Overlay background */
+.image-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 2000;
+  backdrop-filter: blur(8px);
+}
+
+.image-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 🖼️ Zoomed image */
+.zoomed-image {
+  border-radius: 12px;
+  max-width: 70vw;
+  max-height: 70vh;
+  transform: scale(0.4);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1),
+              opacity 0.45s ease;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+  z-index: 10;
+}
+
+.zoomed-image.visible {
+  transform: scale(1.5);
+  opacity: 1;
+}
+
+body.light .image-overlay {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+}
+
+/* ✕ Close button (in top-right of image) */
+.close-btn {
+  position: absolute;
+  top: calc(50% - 35vh + 8px);
+  left: calc(50% + 35vw - 38px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(3px);
+  z-index: 20;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+body.light .close-btn {
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #111;
+}
+
+/* ⬅️➡️ Navigation arrows */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(3px);
+  z-index: 15;
+  opacity: 0.8;
+}
+
+.nav-arrow:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow.prev {
+  left: 15%;
+}
+
+.nav-arrow.next {
+  right: 15%;
+}
+
+/* Light mode */
+body.light .nav-arrow {
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #111;
+}
+
+/* ✨ Smooth fade effect between images */
+.zoomed-image {
+  transition: opacity 0.25s ease-in-out, transform 0.35s ease;
+}
+
+.zoomed-image:not(.visible) {
+  opacity: 0;
+  transform: scale(1.4);
+}
