@@ -2,16 +2,20 @@
 import { fetchPhotos } from "./fetch.js";
 import { renderPhotoCard } from "./renderPhotoCard.js";
 import { setupLoadMore } from "./features/loadmore.js";
+import { setupImageZoom } from "./features/imageZoom.js";
+import "./styles/features/imageZoom.css";
 
 // 🌗 THEME TOGGLE (Sandy's feature)
 const toggle = document.getElementById("toggle");
 const body = document.body;
 
+// Apply saved theme
 if (localStorage.getItem("theme") === "light") {
   body.classList.add("light");
   toggle.classList.add("light");
 }
 
+// Toggle dark/light mode
 toggle.onclick = () => {
   const isLight = body.classList.toggle("light");
   toggle.classList.toggle("light", isLight);
@@ -24,13 +28,16 @@ const app = document.querySelector("#app");
 async function init() {
   const photos = await fetchPhotos(1);
   photos.forEach((photo) => app.appendChild(renderPhotoCard(photo)));
+
+  // Enable features after rendering
   setupLoadMore(app);
+  setupImageZoom(app); // ✅ Move inside init for proper timing
 }
 
 init();
 
 // 🔝 SCROLL TO TOP BUTTON (Simman's feature)
-let myButton = document.getElementById("myBtn");
+const myButton = document.getElementById("myBtn");
 
 window.onscroll = function () {
   scrollFunction();
