@@ -1,0 +1,194 @@
+/* src/styles/features/comments.css */
+
+/* 🔽 Comment section container */
+.comment-section {
+  display: none;
+  padding: 10px;
+  border-radius: 0 0 12px 12px;
+  margin-top: 0;
+  transition: background-color 0.3s ease;
+  background-color: #111;
+  position: relative;
+  overflow: visible;
+  z-index: 5;
+}
+
+/* 🌞 Light mode */
+body.light .comment-section {
+  background-color: #f2f2f2;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* 💬 Comment list */
+.comment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.comment-list li {
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: #ddd;
+  transition: color 0.3s ease;
+}
+
+body.light .comment-list li {
+  color: #333;
+}
+
+/* 🧾 Comment input area */
+.comment-input {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.comment-input input {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  background: #2a2a2a;
+  color: #fff;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.light .comment-input input {
+  background: #f0f0f0;
+  color: #000;
+}
+
+.comment-input input::placeholder {
+  color: #aaa;
+}
+
+body.light .comment-input input::placeholder {
+  color: #777;
+}
+
+/* 🟢 Post button (same as Load More) */
+.comment-input button {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 10px;
+  padding: 6px 18px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.comment-input button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+/* 🌞 Light mode Post button */
+body.light .comment-input button {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #111;
+}
+body.light .comment-input button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 🧷 Comment & Like button alignment */
+.photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid transparent;
+  transition: border-color 0.3s ease;
+  border-bottom: none !important;
+}
+
+body.light .photo-actions {
+  border-color: #ddd;
+}
+body:not(.light) .photo-actions {
+  border-color: #222;
+}
+
+/* 💬 Comment toggle button */
+.comment-btn-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 1.3rem;
+  color: #ccc;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.3s;
+}
+
+.comment-btn-toggle:hover {
+  transform: scale(1.15);
+}
+
+/* 💭 Floating comment bubble animation */
+.photo-card {
+  position: relative;
+  overflow: visible;
+  border-radius: 12px;
+  background-clip: padding-box;
+  background-color: var(--card-bg, #111);
+}
+
+body.light .photo-card {
+  background-color: #f9f9f9;
+}
+
+/* Bubbles come out from the Post button area */
+.floating-bubble {
+  position: absolute;
+  bottom: 52px; /* ✅ just above Post button */
+  right: 85px; /* ✅ horizontally aligned with Post */
+  font-size: 1.2rem;
+  animation: bubble-up 1.3s ease-out forwards;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  user-select: none;
+}
+
+/* Random direction for natural look */
+.floating-bubble:nth-child(odd) {
+  --rand-dir: -1;
+}
+.floating-bubble:nth-child(even) {
+  --rand-dir: 1;
+}
+
+/* Bubble animation */
+@keyframes bubble-up {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(calc(-10px + 20px * var(--rand-dir, 1)), -40px)
+      scale(1.2);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(calc(-20px + 40px * var(--rand-dir, 1)), -90px)
+      scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* 🩶 Prevent any black border bleed */
+.comment-section {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  background-clip: padding-box;
+}

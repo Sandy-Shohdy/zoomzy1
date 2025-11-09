@@ -1,28 +1,30 @@
+// main.js
 import { fetchPhotos } from "./fetch.js";
 import { renderPhotoCard } from "./renderPhotoCard.js";
+import { setupLoadMore } from "./features/loadmore.js";
 
+// 🌗 THEME TOGGLE (Sandy's feature)
 const toggle = document.getElementById("toggle");
 const body = document.body;
 
-// 1. Check and apply saved theme
 if (localStorage.getItem("theme") === "light") {
   body.classList.add("light");
   toggle.classList.add("light");
 }
 
-// 2. Toggle on click
 toggle.onclick = () => {
   const isLight = body.classList.toggle("light");
   toggle.classList.toggle("light", isLight);
-
-  // 3. Save the current theme
   localStorage.setItem("theme", isLight ? "light" : "dark");
 };
 
+<<<<<<< HEAD
+=======
+// 🖼️ GALLERY & LOAD MORE
+>>>>>>> feature/comments
 const app = document.querySelector("#app");
-let page = 1; // start from page 1
-const totalPages = 20; // we know there are 20 pages total
 
+<<<<<<< HEAD
 // Load and display photos
 async function loadPhotos() {
   const photos = await fetchPhotos(page);
@@ -59,14 +61,17 @@ async function setupLoadMore() {
 }
 
 // 🚀 Initialize
+=======
+>>>>>>> feature/comments
 async function init() {
-  await loadPhotos();
-  setupLoadMore();
+  const photos = await fetchPhotos(1);
+  photos.forEach((photo) => app.appendChild(renderPhotoCard(photo)));
+  setupLoadMore(app);
 }
 
 init();
 
-// scroll to top button //
+// 🔝 SCROLL TO TOP BUTTON (Simman's feature)
 let myButton = document.getElementById("myBtn");
 
 window.onscroll = function () {
