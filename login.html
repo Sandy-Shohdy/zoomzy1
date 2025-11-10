@@ -5,24 +5,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login page</title>
-</head>
-<header class="side-header">
-  <nav class="navigation">
-    <a href="index.html"><img src="img/icons8-home-64.png" alt="home" /></a>
-    <a href="index.html">
-      <img src="img/icons8-gallery-64.png" alt="gallery" /></a>
-    <a href="login"><img src="img/icons8-login-50.png" alt="login" /></a>
-  </nav>
   <link rel="stylesheet" href="src/login.css" />
-</header>
+  <link rel="stylesheet" href="popup form.css">
+</head>
+
+
 
 <body>
-  <div id="toggle" class="theme-toggle"></div>
 
+    <div id="toggle" class="theme-toggle">
+    </div>
 
-  <div class="logo-container">
-    <img class="logo" src="img/zoomzy logo.png" alt="logo" />
-  </div>
+    <header class="side-header">
+        <nav class="navigation">
+            <a href="index.html"><img src="img/icons8-home-64.png" alt="home" /></a>
+            <a href="index.html"><img src="img/icons8-gallery-64.png" alt="gallery" /></a>
+            <a href="login"><img src="img/icons8-login-50.png" alt="login"    <img class="logo" src="img/zoomzy logo.png" alt="logo" />
+            </nav> 
+            </header>
+            
 
 
   <div class="glow-ring"></div>
@@ -30,6 +31,7 @@
   <section id="Login-page">
     <h1 class="login-text">Login</h1>
     <p id="error-message"></p>
+    
 
 
     <form id="login-form">
@@ -41,9 +43,6 @@
 
       <button type="submit" class="login">Log in</button>
     </form>
-
-
-
 
     <p>OR</p>
 
@@ -58,22 +57,44 @@
     </button>
 
     <div class="goTo-signupPage">
-      <p>Not on ZoomZy yet? <a href="signup.html">Sign up</a></p>
+      <p>Not on ZoomZy yet? <a href="#" id="open-register">Sign up</a></p>
     </div>
   </section>
-
-  <script type="module" src="/src/main.js"></script>
-
 
 
   <footer class="footer">
     <p>© 2025 Zoomzy — made by Team 3. Hyper Island.</p>
   </footer>
 
-  <script type="module" src="src/login.js" defer></script>
+<!--POP UP SIGN UP FORM (hidden)-->
+
+<div id="registerModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span> <!--an x-button to close popup-->
+
+    <h2 class="join-zoomzy-text">Join the ZoomZy family!</h2>
+
+    <form id="registerForm">
+      
+      <label for="firstname">First name</label>
+      <input type="text" name="First name" id="firstname" placeholder="First name" required><br>
+
+      <label for="lastname">Last name</label>
+      <input type="text" name="Last name" id="lastname" placeholder="Last name" required><br>
+
+      <label for="email">Email</label>
+      <input type="text" name="Email" id="email" placeholder="Email" required><br>
+
+      <label for="password">Password</label>
+      <input type="password" name="Password" id="password" placeholder="Create a password" required>
+
+       <button id="register-button">Join ZoomZy!</button> 
+      </form>
+     
+  </div>
+</div>
+  
+    <script type="module" src="/src/main.js"></script>
+  <script src="popup form.js"></script>
 </body>
-
-
-</body>
-
 </html>
