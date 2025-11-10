@@ -4,6 +4,8 @@
 @import "./styles/features/comments.css";
 @import "./styles/features/likes.css";
 @import "./styles/features/loadmore.css";
+@import "./styles/features/imageZoom.css";
+
 
 /* ================================
    ROOT VARIABLES
