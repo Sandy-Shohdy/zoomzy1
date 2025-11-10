@@ -13,23 +13,23 @@ const randomAuthors = [
 
 // Create a photo card element dynamically
 export function renderPhotoCard(photo) {
-  console.log("Card rendered:", photo.id);
+  console.log("Card rendered:", photo.id); //just for debugging purposes
 
   const card = document.createElement("div");
-  card.className = "photo-card";
-  card.dataset.id = photo.id;
+  card.className = "photo-card"; //CSS class for styling
+  card.dataset.id = photo.id; // Stores photo ID for inside the card, easy access for likes/comments
 
   // Pick a random author
   const authorName =
-    randomAuthors[Math.floor(Math.random() * randomAuthors.length)];
+    randomAuthors[Math.floor(Math.random() * randomAuthors.length)];// Use that number as an index to pick a name from the array with randomAuthors.
 
   // Inner HTML structure for each photo card
   card.innerHTML = `
-    <img src="${photo.image_url}" alt="Photo ${photo.id}" />
+    <img src="${photo.image_url}" alt="Photo ${photo.id}" /> 
     <p class="author">${authorName}</p>
 
     <div class="photo-actions">
-      <button class="like-btn" data-id="${photo.id}">
+      <button class="like-btn" data-id="${photo.id}"> 
         ❤️ <span class="like-count">${photo.likes_count || 0}</span>
       </button>
       <button class="comment-btn-toggle">
@@ -43,7 +43,7 @@ export function renderPhotoCard(photo) {
           .map(
             (c) => `<li><strong>${c.commenter_name}:</strong> ${c.comment}</li>`
           )
-          .join("")}
+         .join("")}
       </ul>
       <div class="comment-input">
         <input type="text" placeholder="Add a comment..." />
