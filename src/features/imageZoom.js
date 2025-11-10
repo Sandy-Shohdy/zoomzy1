@@ -1,43 +1,60 @@
 // src/features/imageZoom.js
+
 export function setupImageZoom(container) {
-  container.addEventListener("click", (e) => {
-    const img = e.target.closest("img");
-    if (!img) return;
+  const images = container.querySelectorAll("img");
+  let currentIndex = -1;
+
+  images.forEach((img, index) => {
+    img.addEventListener("click", () => openImage(img, index));
+  });
+
+  function openImage(img, index) {
+    currentIndex = index;
 
     const overlay = document.createElement("div");
     overlay.classList.add("image-overlay");
 
-    const wrapper = document.createElement("div");
-    wrapper.classList.add("zoom-wrapper");
-
-    const zoomedImg = img.cloneNode();
-    zoomedImg.classList.add("zoomed-image");
-    wrapper.appendChild(zoomedImg);
+    const zoomed = document.createElement("img");
+    zoomed.src = img.src;
+    zoomed.classList.add("zoomed");
 
     const closeBtn = document.createElement("button");
     closeBtn.classList.add("close-btn");
-    closeBtn.innerHTML = "✕";
-    wrapper.appendChild(closeBtn);
+    closeBtn.textContent = "×";
 
-    overlay.appendChild(wrapper);
+    const prevBtn = document.createElement("button");
+    prevBtn.classList.add("nav-btn", "prev-btn");
+    prevBtn.textContent = "‹";
+
+    const nextBtn = document.createElement("button");
+    nextBtn.classList.add("nav-btn", "next-btn");
+    nextBtn.textContent = "›";
+
+    overlay.appendChild(zoomed);
+    overlay.appendChild(closeBtn);
+    overlay.appendChild(prevBtn);
+    overlay.appendChild(nextBtn);
     document.body.appendChild(overlay);
 
-    requestAnimationFrame(() => {
-      overlay.classList.add("visible");
-      zoomedImg.classList.add("visible");
+    function showImage(index) {
+      zoomed.src = images[index].src;
+    }
+
+    prevBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
     });
 
-    const closeZoom = () => overlay.remove();
-    closeBtn.addEventListener("click", closeZoom);
-    overlay.addEventListener("click", (ev) => {
-      if (ev.target === overlay) closeZoom();
+    nextBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
     });
-    document.addEventListener(
-      "keydown",
-      (ev) => {
-        if (ev.key === "Escape") closeZoom();
-      },
-      { once: true }
-    );
-  });
+
+    closeBtn.addEventListener("click", () => overlay.remove());
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) overlay.remove();
+    });
+  }
 }
