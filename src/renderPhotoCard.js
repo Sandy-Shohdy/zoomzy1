@@ -2,7 +2,7 @@
 import { setupLike } from "./features/likes.js";
 import { setupComments } from "./features/comments.js";
 
-// ✅ Random author list — fallback when API has no author
+// Random author list
 const randomAuthors = [
   "Luna Rivera", "Kai Nakamura", "Mila Novak", "Omar Hassan", "Sophie Laurent",
   "Ethan Kim", "Ava Rossi", "Leo Carter", "Zara Ali", "Nina Johansson",
@@ -11,19 +11,19 @@ const randomAuthors = [
   "Gabriel Sousa", "Clara Müller", "Ravi Sharma", "Layla Haddad", "Sebastian Torres"
 ];
 
-// ✅ Create a photo card element dynamically
+// Create a photo card element dynamically
 export function renderPhotoCard(photo) {
-  console.log("🧩 Card rendered:", photo.id);
+  console.log("Card rendered:", photo.id);
 
   const card = document.createElement("div");
   card.className = "photo-card";
   card.dataset.id = photo.id;
 
-  // Use author from API or pick a random one
+  // Pick a random author
   const authorName =
-    photo.author || randomAuthors[Math.floor(Math.random() * randomAuthors.length)];
+    randomAuthors[Math.floor(Math.random() * randomAuthors.length)];
 
-  // ✅ Inner HTML structure for each photo card
+  // Inner HTML structure for each photo card
   card.innerHTML = `
     <img src="${photo.image_url}" alt="Photo ${photo.id}" />
     <p class="author">${authorName}</p>
@@ -52,7 +52,7 @@ export function renderPhotoCard(photo) {
     </div>
   `;
 
-  // ✅ Add a bit of visual variation in photo height
+  // Add a visual variation in photo height
   card.querySelector("img").style.height = `${200 + Math.random() * 150}px`;
 
   // ✅ Activate like & comment features for this card

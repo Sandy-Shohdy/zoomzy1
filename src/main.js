@@ -31,7 +31,22 @@ const app = document.querySelector("#app");
 
 async function init() {
   const photos = await fetchPhotos(1);
-  photos.forEach((photo) => app.appendChild(renderPhotoCard(photo)));
+  photos.forEach(async (photo) => {
+    try {
+      const res = await fetch(
+        `https://image-feed-api.vercel.app/api/images/${photo.id}/like`, //likes it once to get updated count
+        {
+          method: "POST", //HTPP method
+        }
+      );
+      const data = await res.json();
+      if (data.success) photo.likes_count = data.likes_count;//makes current photo like === API real like number
+      
+    } catch (err) {
+      console.error("Number of likes could not be fetched: ", err);
+    }
+
+    app.appendChild(renderPhotoCard(photo))});
   setupLoadMore(app);
   setupImageZoom(app); // ✅ added here
 }
