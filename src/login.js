@@ -24,7 +24,7 @@ function getLoginPageErrors(email, password) {
 
   if (password === "" || password === null) {
     errors.push("password is required.");
-    emailInput.parentElement.classList.add("incorrect");
+    passwordInput.parentElement.classList.add("incorrect");
   }
   return errors;
 }

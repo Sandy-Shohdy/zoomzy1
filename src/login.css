@@ -334,6 +334,10 @@ body.light input[type="password"] {
 #error-message {
   color: #f06272;
 }
+
+.incorrect input {
+  border: 2px solid red;
+}
 /* Buttons */
 
 .login {
