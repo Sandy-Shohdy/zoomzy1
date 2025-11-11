@@ -40,15 +40,20 @@ async function init() {
         }
       );
       const data = await res.json();
-      if (data.success) photo.likes_count = data.likes_count;//makes current photo like === API real like number
-      
+      if (data.success) photo.likes_count = data.likes_count; //makes current photo like === API real like number
     } catch (err) {
       console.error("Number of likes could not be fetched: ", err);
     }
 
-    app.appendChild(renderPhotoCard(photo))});
+    app.appendChild(renderPhotoCard(photo));
+  });
+
   setupLoadMore(app);
-  setupImageZoom(app); // ✅ added here
+
+  setTimeout(() => {
+    console.log("Setup listeners");
+    setupImageZoom(app); // ✅ added here
+  }, 1000);
 }
 
 init();
