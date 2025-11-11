@@ -207,7 +207,7 @@ body.light .navigation img {
   object-fit: cover;
 }
 
-/* Uneven Pinterest look */
+/* Uneven Pinterest look - gives different heights to every 3rd image.*/
 .photo-card:nth-child(3n) img {
   height: 200px;
 }
