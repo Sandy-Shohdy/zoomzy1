@@ -1,4 +1,5 @@
 // src/features/imageZoom.js
+
 export function setupImageZoom(container) {
   const images = container.querySelectorAll("img");
   let currentIndex = -1;
@@ -15,18 +16,18 @@ export function setupImageZoom(container) {
 
     const zoomed = document.createElement("img");
     zoomed.src = img.src;
-    zoomed.classList.add("zoomed-image");
+    zoomed.classList.add("zoomed");
 
     const closeBtn = document.createElement("button");
     closeBtn.classList.add("close-btn");
     closeBtn.textContent = "×";
 
     const prevBtn = document.createElement("button");
-    prevBtn.classList.add("nav-arrow", "prev");
+    prevBtn.classList.add("nav-btn", "prev-btn");
     prevBtn.textContent = "‹";
 
     const nextBtn = document.createElement("button");
-    nextBtn.classList.add("nav-arrow", "next");
+    nextBtn.classList.add("nav-btn", "next-btn");
     nextBtn.textContent = "›";
 
     overlay.appendChild(zoomed);
@@ -34,12 +35,6 @@ export function setupImageZoom(container) {
     overlay.appendChild(prevBtn);
     overlay.appendChild(nextBtn);
     document.body.appendChild(overlay);
-
-    // Görünürlük animasyonunu başlat
-    requestAnimationFrame(() => {
-      overlay.classList.add("visible");
-      zoomed.classList.add("visible");
-    });
 
     function showImage(index) {
       zoomed.src = images[index].src;
