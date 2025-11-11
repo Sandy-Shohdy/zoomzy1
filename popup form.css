@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
 
+:root {
+  --bg-dark: #000;
+  --accent-green: #5e8c31;
+  --text-light: #fff;
+  --hover-blue: #646cff;
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
 
 .join-zoomzy-text {
     text-align: center;
@@ -16,18 +25,52 @@
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
+    color: var(--text-light); 
+}
+
+body.light { 
+    background-color: #f8f8fb;
+    color: black;
 }
 
 .modal-content {
     background-color: #ebebdf;
-    margin: 10% auto; /* centers it*/
-    padding: 20px;
+    color: #000; /* for dark mode text */
+    transition: background-color 0.3s, color 0.3s; /* smooth transition */
+    margin: 5% auto; /* centers it*/
+    padding: 60px;
     border-radius: 10px;
-    width: 400px;
+    width: 70%;
+    max-width: 700px;
+    min-width: 320px;
     font-family: 'Montserrat';
-    height: auto;
+    height: 77%;
 
 }
+
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;      /* takes up more of a smaller screen */
+    padding: 20px;
+  }
+}
+
+.modal-inner { /* keeps the inside of the popup smaller than the container */
+    width: 90%;
+    max-width: 500px; /* responsive to the parent width */
+    margin: 0 auto; /* limits how wide it is */
+    height: auto;
+}
+
+
+/* light mode toggle */ 
+body.light .modal-content {
+    background-color: #032a13;
+    color: #fff;
+}
+
+
+
  /* close button in popup */
 .close {
     color: #aaa;
@@ -37,7 +80,16 @@
     cursor: pointer;
 }
 
+/* light mode toggle */ 
+body.light .close {
+    color: #666;
+}
+
 .close:hover {
+    color: black;
+}
+
+body.light .close:hover {
     color: black;
 }
 
@@ -58,9 +110,16 @@
   outline: none;
   background: #111;
   color: #fff;
+  transition: background-color 0.3s, color 0.3s;
   border: none;
   box-sizing: border-box; /* makes sure it's in the box */
   text-align: center;
+}
+
+/* light mode toggle */ 
+body.light #registerForm input {
+    background: #f0f0f0;
+    color: #000;
 }
 
 /* join zoomzy button */ 
@@ -79,5 +138,42 @@
     cursor: pointer;
 }
 
+#register-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ffcc00;
+}
 
+
+/* TOGGLE */
+#toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 20px;
+  border-radius: 34px;
+  background-color: #f9f2f2;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 1100;
+}
+
+#toggle::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #52b670;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s;
+}
+
+#toggle.light {
+  background-color: rgb(12, 0, 0);
+}
+#toggle.light::before {
+  transform: translateX(30px);
+}
 
