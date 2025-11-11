@@ -28,6 +28,7 @@ function getLoginPageErrors(email, password) {
   }
   return errors;
 }
+
 const allInputs = [emailInput, passwordInput];
 allInputs.forEach((input) => {
   input.addEventListener("input", () => {

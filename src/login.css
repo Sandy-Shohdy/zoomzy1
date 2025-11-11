@@ -307,9 +307,6 @@ label {
   text-align: left;
 }
 
-div.incorrect label {
-  background-color: #f06272;
-}
 input[type="email"],
 input[type="password"] {
   width: 100%;
