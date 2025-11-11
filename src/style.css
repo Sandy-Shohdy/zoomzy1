@@ -6,7 +6,6 @@
 @import "./styles/features/loadmore.css";
 @import "./styles/features/imageZoom.css";
 
-
 /* ================================
    ROOT VARIABLES
 ================================ */
@@ -151,6 +150,22 @@ body.light .navigation img {
   text-align: center;
   padding: 0 20px;
   flex: 1;
+}
+.introduction-text {
+  font-size: 1.3rem;
+  color: #ccc;
+  margin-top: 1px;
+  margin-left: 50px;
+  margin-right: 50px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  text-shadow: #37834e 1px 1px;
+}
+
+body.light .introduction-text {
+  color: #333;
+  text-shadow: #b8ccb0 1px 1px;
 }
 
 .logo-container {
