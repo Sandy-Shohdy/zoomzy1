@@ -59,5 +59,7 @@ export function renderPhotoCard(photo) {
   setupLike(card);
   setupComments(card);
 
+  // Setup image zoom here
+
   return card;
 }

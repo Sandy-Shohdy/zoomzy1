@@ -1,4 +1,3 @@
-
 export function setupImageZoom(container) {
   const images = container.querySelectorAll("img");
   let currentIndex = -1;
