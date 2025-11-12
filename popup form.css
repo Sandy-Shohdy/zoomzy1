@@ -35,25 +35,40 @@ body.light {
 
 .modal-content {
     background-color: #ebebdf;
-    color: #000; /* for dark mode text */
+    color: #000; /* dark mode text */
     transition: background-color 0.3s, color 0.3s; /* smooth transition */
-    margin: 5% auto; /* centers it*/
-    padding: 60px;
+    margin: 5% auto; /* centers modal */
+    padding: 20px;    /* mobile default */
     border-radius: 10px;
-    width: 70%;
-    max-width: 700px;
-    min-width: 320px;
+    width: 90%;       /* mobile default */
+    max-width: 700px; /* caps on large screens */
+    min-width: 320px; /* prevents being too small */
     font-family: 'Montserrat';
-    height: 77%;
-
+    box-sizing: border-box; /* ensures padding doesn’t break layout */
 }
-
-@media (max-width: 600px) {
+  
+  
+@media (max-width: 601px) {
   .modal-content {
-    width: 90%;      /* takes up more of a smaller screen */
-    padding: 20px;
+    width: 80%;     
+    padding: 40px;
   }
 }
+
+@media (max-width: 901px) {
+  .modal-content {
+    width: 70%;
+    padding: 60px;
+  }
+}
+
+@media (min-width: 1201px) {
+  .modal-content {
+    width: 65%;
+    padding: 60px; /* same padding, just a slightly narrower width for large screens */
+  }
+}
+
 
 .modal-inner { /* keeps the inside of the popup smaller than the container */
     width: 90%;
@@ -68,8 +83,6 @@ body.light .modal-content {
     background-color: #032a13;
     color: #fff;
 }
-
-
 
  /* close button in popup */
 .close {
